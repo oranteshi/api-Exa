@@ -6,12 +6,19 @@ import { ventaRouter } from "./venta/infraestructure/VentaRouter";
 
 const app = express();
 
-const signale = new Signale();
+app.disable("x-powered-by");
+
+const options = {
+  secrets: ["([0-9]{4}-?)+"]
+};
+
+const logger = new Signale(options); 
 
 app.use(express.json());
 app.use("/productos", productoRouter);
 app.use("/ventas", ventaRouter);
 
 app.listen(4000, () => {
-  signale.success("Server online in port 4000");
+  logger.success("Server online in port 4000");
 });
+

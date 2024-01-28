@@ -1,12 +1,16 @@
 import express from "express";
-
-import {createVentaController} from "./dependencies";
-import {getAllVentaController} from "./dependencies";
-import {getByIdVentaController  } from "./dependencies";
-
+import { createVentaController, getAllVentaController, getByIdVentaController } from "./dependencies";
 
 export const ventaRouter = express.Router();
 
-ventaRouter.get("/",getAllVentaController.run.bind(getAllVentaController));
-ventaRouter.post("/",createVentaController.run.bind(createVentaController));
-ventaRouter.get("/:id",getByIdVentaController.run.bind(getByIdVentaController));
+ventaRouter.get("/", (req, res) => {
+    getAllVentaController.run(req, res);
+});
+
+ventaRouter.post("/", (req, res) => {
+    createVentaController.run(req, res);
+});
+
+ventaRouter.get("/:id", (req, res) => {
+    getByIdVentaController.run(req, res);
+});
